@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Title</title>
+
+    <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
+
+    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='waitingfor.js') }}"></script>
+  </head>
+
+  <body>
+
+		<div class="container">
+
+		<div class="row" style=" margin-top: 12em;">
+				<div class="col-md-8 col-md-offset-2">
+				<form>
+						<div class="form-group">
+						<input type="text" class="form-control" name="field_fio" aria-describedby="emailHelp" placeholder="ФИО">
+						</div>
+						<div class="form-group">
+						<textarea class="form-control" name="field_dogovor" rows="20" style="resize: none;" readonly>{% include 'dogovor.html' %}</textarea>
+						</div>
+						<button type="button" id="sendButton" class="btn btn-primary">Submit</button>
+				</form>
+				</div>
+		</div>
+
+		</div>
+
+		<div class="modal fade" id="my_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+						<div class="modal-header text-center">
+								<h1>Сертификат готов!</h1>
+						</div>
+						<div class="modal-body">
+								<div class="text-center">
+										<a id="cert_link_0" href="" class="btn btn-primary btn-lg">Скачать PDF</a>
+										<a id="cert_link_1" href="" class="btn btn-primary btn-lg">Получить сертификат!</a>
+								</div>
+						</div>
+			</div>
+		  </div>
+		</div>
+
+		<script type=text/javascript>
+				$( document ).ready(function() {
+						$(function() {
+								$('#sendButton').bind('click', function() {
+										var field_fio = $('input[name="field_fio"]').val()
+										var field_dogovor = $('textarea[name="field_dogovor"]').val()
+										waitingDialog.show('Please wait...')
+										setTimeout(function () { waitingDialog.hide();
+												$.post( "/_ajax", { field_fio: field_fio, field_dogovor: field_dogovor })
+														.done(function( data ) {
+																if(data.success === false) {
+																		alert( data.error );
+																} else {
+																		$("#cert_link_0").attr("href", data.cert_addr)
+																		$("#cert_link_1").attr("href", data.cert_addr)
+																		$('#my_modal').modal('show')
+																}
+												});
+										}, 2000);
+										return false;
+								});
+						});
+				});
+		</script>
+
+  </body>
+</html>
