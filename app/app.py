@@ -25,7 +25,6 @@ def check_result(hash_fio, hash_dogovor, guid, cert_id):
 		assert metadata['hash_fio'] == hash_fio
 		assert metadata['hash_dogovor'] == hash_dogovor
 
-		file_content='{"key":"{GUID}","eTag":"{ETAG}","size":207,"metadata":{"GUID":"{GUID}","hash_dogovor":"{HASH_DOGOVORA}","hash_fio":"{HASH_FIO}"},"sequencer":"{SEQ}"}'
 		file_content=''.join(['{"key":"', guid 
 				, '","eTag":"' , data['eTag']
 				,'","size":207,"metadata":{"GUID":"' , guid
