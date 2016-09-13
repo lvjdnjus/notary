@@ -1,0 +1,163 @@
+html {
+  height: 100%;
+}
+
+body {
+  @extend %table;
+	background-color: #1E4879;
+	background-image: radial-gradient(circle at -10% 20%, #1E4879, transparent 25%),
+										radial-gradient(circle at 110% 55%, #3DA3A8, transparent 65%),
+										linear-gradient(to right, #223667 35%, #1F2E54 100%);
+	background-attachment: fixed;
+}
+
+h1 {
+  @include animation(fade-in-up 2s alternate);
+  color: #fff;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 300;
+}
+
+strong {
+  font-weight: bold;
+}
+
+input,
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+input {
+  @include animation(fade-in-up 2s forwards);
+  width: 100%;
+  height: 55px;
+  padding: 0 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.3);
+  color: #444;
+  font-size: 18px;
+
+  :placeholder {
+    color: #c7c7c7;
+  }
+
+  &:focus + label:before {
+    @include animation(input-shadow 0.3s forwards);
+  }
+}
+
+button {
+  @include animation(fade-in-up 2s forwards);
+  cursor: pointer;
+  display: block;
+  transition: background-color 200ms ease;
+  user-select: none;
+  text-align: center;
+  white-space: nowrap;
+
+  &.agree {
+    width: 150px;
+    margin: 0 auto;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+    font-size: 18px;
+    line-height: 55px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+label {
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 5px;
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3);
+  }
+}
+
+.hidden {
+  overflow: hidden;
+}
+
+.center {
+  display: block;
+  text-align: center;
+}
+
+.container {
+  @extend %table-cell;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 700px;
+  margin: 0 auto;
+  padding: 150px 0 48px;
+  box-sizing: border-box;
+  text-align: left;
+
+  &:before {
+    @include image-2x('../images/logo@2x.png');
+    content: '';
+    position: absolute;
+    top: 48px;
+    left: 50%;
+    width: 210px;
+    height: 62px;
+    margin-left: -105px;
+    background-image: url(../images/logo.png);
+  }
+}
+
+.input {
+  position: relative;
+  margin: 40px 0;
+}
+
+.agreement-text {
+  @include animation(fade-in-up-min 2s forwards);
+  width: 640px;
+  height: 380px;
+  margin-bottom: 48px;
+  border-radius: 12px;
+  padding: 30px;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.3);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.background-img {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-image: url(../images/background.jpg);
+	background-size: cover;
+	opacity: 0.6;
+}

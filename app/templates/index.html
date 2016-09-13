@@ -1,76 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Title</title>
-
-    <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
-
-    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
-    <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
-    <script src="{{ url_for('static', filename='waitingfor.js') }}"></script>
-  </head>
-
-  <body>
-
-		<div class="container">
-
-		<div class="row" style=" margin-top: 12em;">
-				<div class="col-md-8 col-md-offset-2">
-				<form>
-						<div class="form-group">
-						<input type="text" class="form-control" name="field_fio" aria-describedby="emailHelp" placeholder="ФИО">
-						</div>
-						<div class="form-group">
-						<textarea class="form-control" name="field_dogovor" rows="20" style="resize: none;" readonly>{% include 'dogovor.html' %}</textarea>
-						</div>
-						<button type="button" id="sendButton" class="btn btn-primary">Submit</button>
-				</form>
-				</div>
-		</div>
-
-		</div>
-
-		<div class="modal fade" id="my_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-						<div class="modal-header text-center">
-								<h1>Сертификат готов!</h1>
-						</div>
-						<div class="modal-body">
-								<div class="text-center">
-										<a id="cert_link_0" href="" class="btn btn-primary btn-lg">Скачать PDF</a>
-										<a id="cert_link_1" href="" class="btn btn-primary btn-lg">Получить сертификат!</a>
-								</div>
-						</div>
-			</div>
-		  </div>
-		</div>
-
-		<script type=text/javascript>
-				$( document ).ready(function() {
-						$(function() {
-								$('#sendButton').bind('click', function() {
-										var field_fio = $('input[name="field_fio"]').val()
-										var field_dogovor = $('textarea[name="field_dogovor"]').val()
-										waitingDialog.show('Please wait...')
-										setTimeout(function () { waitingDialog.hide();
-												$.post( "/_ajax", { field_fio: field_fio, field_dogovor: field_dogovor })
-														.done(function( data ) {
-																if(data.success === false) {
-																		alert( data.error );
-																} else {
-																		$("#cert_link_0").attr("href", data.cert_addr)
-																		$("#cert_link_1").attr("href", data.cert_addr)
-																		$('#my_modal').modal('show')
-																}
-												});
-										}, 2000);
-										return false;
-								});
-						});
-				});
-		</script>
-
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/application.css">
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <h1>Прототип нотаризации договора оферты</h1>
+      <div class="input">
+        <input type="text" placeholder="ФИО" autocomplete="off" id="name" name="field_fio">
+        <label for="name"></label>
+      </div>
+      <div class="agreement-text">
+        <div class="nano">
+          <div class="nano-content">
+            <p name="field_dogovor">
+              <strong>
+                АКЦИОНЕРНОЕ ОБЩЕСТВО «АЛЬФА-БАНК», именуемое в дальнейшем «Банк», с одной
+                стороны, и Пользователь, с другой стороны, при совместном упоминании в дальнейшем
+                именуемые «Стороны», заключили настоящий договор информационного взаимодействия
+                онлайн-сервиса «Поток», именуемый в дальнейшем «Договор», о нижеследующем.
+              </strong><br><br>
+              <strong class="center">1. Термины и определения, используемые в Договоре</strong>
+              <strong>Абонентский договор</strong> - договор, зарегистрированный на имя Инвестора/Руководителя заемщика, о
+              предоставлении услуг подвижной электросвязи с использованием Абонентского номера между
+              Инвестором/Руководителем заемщика и оператором сотовой связи, предоставляющим свои услуги
+              на территории Российской Федерации (далее – РФ). Абонентский договор должен быть оформлен
+              на бумажном носителе и предусматривать возможность Инвестора/Руководителя заемщика
+              осуществлять с использованием Абонентского номера прием и обработку голосовых вызовов, а
+              также прием и отправление SMS-сообщений.<br>
+              <strong>Абонентский номер</strong> – номер мобильного телефона, представленный Инвестору/Руководителю
+              заемщика оператором подвижной электросвязи в соответствии с Абонентским договором, и
+              предоставленный Пользователем Банку в качестве основного контактного номера, который
+              используется для взаимодействия с Банком, в том числе при входе в Интернет-банк.
+              Аутентификационные данные – данные, необходимые Пользователю для входа в Личный
+              кабинет: уникальные Логин и Пароль Пользователя, используемые Пользователем при доступе в
+              Интернет-банк.<br>
+              <strong>График платежей</strong> – график платежей, который составляется в соответствии с Договором займа.
+              Договор займа – договор займа, заключенный между Заемщиком и Займодавцем посредством
+              Онлайн-сервиса, путём акцепта Займодавцем оферты Заемщика, определяемого на основании
+              оферты Заемщика, в виде Общих условий договора займа и Индивидуальных условий договора
+              займа посредством перевода Займодавцем денежных средств на счет Заемщика в размере и в срок,
+              указанные в Договоре займа.<br>
+              <strong>Заемщик</strong> – юридическое лицо – резидент РФ или индивидуальный предприниматель – Клиент
+              Банка, который осуществил привлечение денежных средств путем заключения Договоров займа
+              посредством Онлайн-сервиса.<br>
+              <strong>Заявка на инвестирование</strong> – заявка, оформленная Потенциальным инвестором посредством
+              Онлайн-сервиса, подтверждающая решение Потенциального инвестора предоставить инвестиции
+              указанным в ней Потенциальным заемщикам.
+            </p>
+          </div>
+        </div>
+      </div>
+      <button type="button" id="sendButton" class="agree">Принять</button>
+    </div>
+  </div>
+  <div class="background-img"></div>
+  <div class="popup-overlay">
+    <div class="popup-content">
+      <div class="popup-loader-container">
+        <div class="popup-loader">
+          <div class="popup-loader-inner"></div>
+        </div>
+      </div>
+      <div class="popup-certificate">
+        <div class="popup-certificate-title">Сертификат готов!</div>
+        <a href="#" id="cert_link_0" class="popup-certificate-buttons popup-certificate-buttons_download">Cкачать PDF</a>
+        <a href="#" id="cert_link_1" class="popup-certificate-buttons popup-certificate-buttons_get">Получить сертификат</a>
+        <div class="popup-certificate-close"></div>
+      </div>
+    </div>
+  </div>
+  <script src="/javascripts/application.js"></script>
+<script type=text/javascript>
+$( document ).ready(function() {
+    $(function() {
+        $('#sendButton').bind('click', function() {
+            var field_fio = $('input[name="field_fio"]').val()
+            var field_dogovor = $('p[name="field_dogovor"]').html()
+            $.post( "/_ajax", { field_fio: field_fio, field_dogovor: field_dogovor })
+                .done(function( data ) {
+                    if(data.success === false) {
+                        //alert( data.error );
+                    } else {
+                        $("#cert_link_0").attr("href", data.cert_addr)
+                        $("#cert_link_1").attr("href", data.cert_addr)
+                    }
+                });
+            return false;
+        });
+    });
+});
+</script>
+</body>
 </html>

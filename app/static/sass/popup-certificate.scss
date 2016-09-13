@@ -1,0 +1,82 @@
+%btns {
+  @include image-2x('../images/certificate-buttons@2x.png', 45px, 20px);
+  background-image: url(../images/certificate-buttons.png);
+}
+
+.popup-certificate {
+  position: relative;
+  display: none;
+  border-radius: 10px;
+  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.2);
+  padding: 40px 20px;
+  background-color: #fff;
+  font-size: 0;
+
+  &-title {
+    margin-bottom: 40px;
+    color: #333;
+    font-size: 30px;
+  }
+
+  &-buttons {
+    transition: 0.3s background-color;
+    position: relative;
+    display: inline-block;
+    margin: 0 10px;
+    border-radius: 3px;
+    padding: 0 15px 0 40px;
+    color: #fff;
+    text-decoration: none;
+    line-height: 40px;
+    font-size: 14px;
+
+    &:before {
+      @extend %btns;
+      content: '';
+      position: absolute;
+      top: 50%;
+      height: 20px;
+      margin-top: -10px;
+    }
+
+    &_download {
+      background-color: #217fb0;
+
+      &:hover {
+        background-color: #1c6c96;
+      }
+
+      &:before {
+        left: 14px;
+        width: 16px;
+      	background-position: -29px 0;
+      }
+    }
+
+    &_get {
+      background-color: #2caf91;
+
+      &:hover {
+        background-color: #25967c;
+      }
+
+      &:before {
+        left: 15px;
+        width: 14px;
+      	background-position: 0 0;
+      }
+    }
+  }
+
+  &-close {
+    @extend %btns;
+    cursor: pointer;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    z-index: 1;
+    width: 15px;
+  	height: 15px;
+  	background-position: -14px 0;
+  }
+}

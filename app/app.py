@@ -6,7 +6,7 @@ import json
 import requests
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 BASE_ADDR = 'http://notary-promedicus.itsbeta.com'
 
@@ -42,13 +42,14 @@ def upload_data(fio, dogovor):
 				cert = requests.post(API_URL, json=json_data).json()['cert']
 		except Exception as e:
 				return None
-		check_result(json_data['hash_fio'], json_data['hash_dogovor'], json_data['GUID'], cert)
+#		check_result(json_data['hash_fio'], json_data['hash_dogovor'], json_data['GUID'], cert)
 		return get_full_cert_addr(cert)
 
 @app.route('/_ajax', methods=['POST'])
 def handle_ajax():
 		field_fio = request.form.get('field_fio')
 		field_dogovor = request.form.get('field_dogovor')
+		print(field_fio, field_dogovor)
 		if not field_fio or not field_dogovor:
 				return jsonify(success=False, error="Please fill all fields")
 		cert_addr = upload_data(field_fio, field_dogovor)
