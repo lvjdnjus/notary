@@ -10,7 +10,7 @@ app = Flask(__name__, static_url_path='')
 
 BASE_ADDR = 'http://notary-promedicus.itsbeta.com'
 
-API_KEY = 'F24CDF1a6fED79b3f48eD559244a5c6b'
+API_KEY = ''
 API_URL = BASE_ADDR + '/api/v1/uploadData?apikey={}'.format(API_KEY)
 
 
